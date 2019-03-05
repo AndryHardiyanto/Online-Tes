@@ -33,6 +33,7 @@
     }
     
     function Duplicate(temp,temp2,temp3,count){
+    var flagMin = true;
       if(!checkDuplicate(temp,temp2)){
           count++;
           return count;
@@ -42,9 +43,21 @@
         }else if(!checkDuplicate(temp2,temp3)){
           count++;
           return count;
-        }else if(!checkDuplicate2(temp,temp2,temp3)){
-          count++;
-          return count;
+        }
+        if(!checkDuplicate2(temp,temp2,temp3)){
+			 if(!checkDuplicate(temp,temp2)){
+         	 	flagMin = false;
+             } 
+             if(!checkDuplicate(temp,temp3)){
+				flagMin = false;
+        	} 
+            if(!checkDuplicate(temp2,temp3)){
+          		flagMin = false;
+        	}
+            
+            if(flagMin == true){
+            	count++;
+            }
         }
         return count;
     }
