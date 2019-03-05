@@ -1,0 +1,112 @@
+<script>
+  var temp = [["100","ryan","music","2"],["200","apeach","math","2"],["300","tube","computer","3"],["400","con","computer","4"],["500","muzi","music","3"],["600","apeach","music","2"]];
+    
+    var studentNumber=[];
+    var StudentName =[];
+    var StudentMajor =[];
+    var StudentGrade=[];
+    var count=0;
+    var flagSN=false,flagSNA=false,flagSM=false,flagSG=false;
+    
+    function checkDuplicate(temp,temp2){
+        for(var i=0;i<temp.length;i++ ){
+            var checkTemp = temp[i]+temp2[i];
+            for(var j=i+1;j<temp.length;j++){
+                    if(checkTemp == temp[j]+temp2[j]){
+                        return true;
+                       }
+              }
+        }
+        return false;
+    }
+    
+    function checkDuplicate2(temp,temp2,temp3){
+        for(var i=0;i<temp.length;i++ ){
+            var checkTemp = temp[i]+temp2[i]+temp3[i];
+            for(var j=i+1;j<temp.length;j++){
+                    if(checkTemp == temp[j]+temp2[j]+temp3[j]){
+                        return true;
+                       }
+              }
+        }
+        return false;
+    }
+    
+    function Duplicate(temp,temp2,temp3,count){
+      if(!checkDuplicate(temp,temp2)){
+          count++;
+          return count;
+        }else if(!checkDuplicate(temp,temp3)){
+          count++;
+          return count;
+        }else if(!checkDuplicate(temp2,temp3)){
+          count++;
+          return count;
+        }else if(!checkDuplicate2(temp,temp2,temp3)){
+          count++;
+          return count;
+        }
+        return count;
+    }
+    
+    function checkFlag(flaga,flagb,flagc,flagd,count){
+        if(flagSNA == false){
+          count++;
+        }
+        if(flagSM == false){
+          count++;
+        }
+        if(flagSG == false){
+          count++;
+        }
+        if(flagSN==false){
+          count++;
+        }
+    return count;
+    }
+    
+function solution (temp){
+    for(var i=0;i<temp.length;i++){
+       studentNumber[i] = temp[i][0];
+         StudentName[i] = temp[i][1];
+         StudentMajor[i] = temp[i][2];
+         StudentGrade[i] = temp[i][3];
+    }
+    
+    for(var i=0;i<temp.length;i++ ){
+      for(var j=i+1;j<temp.length;j++){
+          if(studentNumber[i] == studentNumber[j]){
+              flagSN = true;
+            }
+            if(StudentName[i] == StudentName[j]){
+              flagSNA = true;
+            }
+            if(StudentMajor[i] == StudentMajor[j]){
+              flagSM = true;
+            }
+            if(StudentGrade[i] == StudentGrade[j]){
+              flagSG = true;
+            }
+        }
+  }
+    var tempcount = checkFlag(flagSN,flagSNA,flagSM,flagSG,count);
+    if(tempcount ==4){
+    	return tempcount;
+    }else{
+        if(flagSN==false){
+       	 	return Duplicate(StudentName,StudentMajor,StudentGrade,tempcount);
+        }
+        if(flagSNA == false){
+	        return Duplicate(studentNumber,StudentMajor,StudentGrade,tempcount);
+        }
+        if(flagSM == false){
+        	return Duplicate(studentNumber,StudentName,StudentGrade,tempcount);
+        }
+        if(flagSG == false){
+        	return Duplicate(studentNumber,StudentName,StudentGrade,tempcount);
+        }
+	return tempcount;
+    }
+   }
+    document.writeln(solution(temp));
+</script>
