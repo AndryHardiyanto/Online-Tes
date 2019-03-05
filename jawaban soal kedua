@@ -1,0 +1,81 @@
+<script>
+ var answer = [];
+ var N=4;
+ var users = [4,4,4,4,4] //[2,1,2,6,2,4,3,3];
+ var tempAnswer=[];
+ var tempUser = [];
+ var len =users.length;
+ var answer2=[];
+ var count=0;
+
+
+function sort( temp, temp2 ){
+    for(var i=1;i<tempAnswer.length;i++){
+      for(var j=1;j<tempAnswer.length;j++){
+        if(tempAnswer[j]<tempAnswer[j+1]){
+            var temp = tempAnswer[j];
+            tempAnswer[j]=tempAnswer[j+1];
+            tempAnswer[j+1]=temp;
+
+            var temp2 = answer2[j];
+            answer2[j]=answer2[j+1];
+            answer2[j+1]=temp2;
+        }
+      }
+    }
+}
+
+function getMaxValue(users){
+  users.sort();
+  return users[users.length-1];
+}
+
+function solution(N,Users){
+
+    for(var i=0;i<users.length;i++){
+          var temp = tempUser[users[i]];
+          if(typeof tempUser[users[i]] == "undefined"){
+           tempUser[users[i]] = 1;
+           
+          }else{
+            tempUser[users[i]]++;
+          }
+    }
+    
+    var lenUser = getMaxValue(users);
+       
+    for(var i=1;i<=lenUser;i++){
+      var temp = (tempUser[i]/len);
+      var tempLen = tempUser[i];
+      
+      if(!temp){
+        temp =0;
+      }
+      if(!tempLen){
+      tempLen=0;
+      }
+      
+      tempAnswer[i]=temp;
+      answer2[i]=i;
+      len=len-tempLen;
+         
+    }
+
+    sort(tempAnswer,answer2);
+
+    for(var i=1;i<answer2.length;i++){
+     if(answer2[i]<=N){
+      answer[count]=answer2[i];
+        count++;
+     }
+    }
+
+//    for(var i=0;i<answer.length;i++){
+//    	document.writeln(answer[i]);
+//    }
+    return answer;
+}
+
+solution(N,users);
+
+</script>
