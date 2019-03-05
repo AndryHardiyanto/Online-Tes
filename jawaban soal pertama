@@ -1,0 +1,41 @@
+var record = 
+[
+"Enter uid1234 Muzi", 
+"Enter uid4567 Prodo", 
+"Leave uid1234", 
+"Enter uid1234 Prodo", 
+"Change uid4567 Ryan"
+];
+
+function solution(record) {
+    var answer = [];
+    var answer=[];
+var countTemp=0;
+
+
+for(var i=0;i<record.length;i++){
+    var res = record[i].split(" ");
+
+     if(res[0] == "Enter"){
+        answer[countTemp] = res[2] + " Came in " + res[1]; 
+        countTemp++;
+     }else if(res[0] == "Leave"){
+        answer[countTemp] =  res[2] +" has left " + res[1]; 
+        countTemp++;
+     }
+        for(var j=0;j<answer.length;j++){
+            var tempres = answer[j].split(" ");
+                if(res[1] == tempres[3] ){
+                answer[j]=answer[j].replace(tempres[0],res[2] );
+            }
+        }
+     
+}
+	for(var j=0;j<countTemp;j++){
+    	var temp = answer[j].split(" ");
+        answer[j]= temp[0]+" "+temp[1]+" "+temp[2];
+    }
+    return answer;
+}
+
+//document.write(solution(record));
